@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int i,l=1,n,m;
+    printf("podaj liczby n i m\n");
+    printf("n=");
+    scanf("%i",&n);
+    printf("m=");
+    scanf("%i", &m);
+    for (i=n;i<=m;i++)
+    {
+    l=l*i;
+    }
+    printf("%i",l);
+}

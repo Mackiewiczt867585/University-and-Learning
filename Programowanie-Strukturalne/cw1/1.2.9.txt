@@ -1,0 +1,11 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int main()
+{
+    float l;
+    scanf("%f",&l);
+    printf("%f",sqrt(l));
+   return 0;
+}

@@ -1,0 +1,1 @@
+Metody Inynierii Wiedzy , Python

@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    float W,Wx,Wy,a,b,c,d,e,f,x,y;
+    scanf("%f", &a);
+    scanf("%f", &b);
+    scanf("%f", &c);
+    scanf("%f", &d);
+    scanf("%f", &e);
+    scanf("%f", &f);
+    W=a*e-b*d;
+    Wx=c*e-b*f;
+    Wy=a*f-c*d;
+    if (W!=0)
+    {
+    x=Wx/W;
+    y=Wy/W;
+    printf("rozwiazania\n");
+    printf("%f",x);
+    printf("%f",y);
+    }
+    else if (Wx==0 & Wy==0)
+    {
+    printf("rownanie ma nieskonczenie wiele rozwiazac\n");
+    }
+    else if (Wx!=0 & Wy!=0)
+    {
+    printf("rownanie nie ma rozwiazan");
+    }
+
+}

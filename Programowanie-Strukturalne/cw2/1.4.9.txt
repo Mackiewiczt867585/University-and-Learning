@@ -1,0 +1,20 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int unsigned nwd,i,n,m;
+    printf("podaj liczby n i m takie, �e n<m\n");
+    printf("n=");
+    scanf("%i",&n);
+    printf("m=");
+    scanf("%i",&m);
+    for(i=1;i<=n;i++)
+    {
+        if(n%i==0 & m%i==0)
+        {
+        nwd=i;
+        }
+    }
+    printf("%i",nwd);
+}

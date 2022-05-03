@@ -1,0 +1,13 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int main()
+{
+    int l1,l2,l3;
+    scanf("%i",&l1);
+    scanf("%i",&l2);
+    scanf("%i",&l3);
+    printf("%f",(float)(l1+l2+l3)/3);
+   return 0;
+}

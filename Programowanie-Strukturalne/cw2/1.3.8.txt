@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include<math.h>
+int main()
+{
+    int a,b,c,figura;
+    float p,P;
+    printf("wybierz figure:\n");
+    printf("1.kwadrat\n");
+    printf("2.trojkat\n");
+    printf("3.prostokat\n");
+    scanf("%i",&figura);
+    switch (figura)
+    {
+
+    case 1:
+
+    printf("podaj bok kwadratu:");
+    scanf("%i", &a);
+    P=pow(a,2);
+    printf("pole tego kwadratu wynosi:");
+    printf("%f",P);
+
+    break;
+
+    case 2:
+
+    printf("podaj boki trojkata:\n");
+    printf("a=");
+    scanf("%i",&a);
+    printf("b=");
+    scanf("%i",&b);
+    printf("c=");
+    scanf("%i",&c);
+    p=((a+b+c)/2);
+    P=sqrt(p*(p-a)*(p-b)*(p-c));
+    printf("pole tego trojkata wynosi:");
+    printf("%f", P);
+
+    break;
+
+    case 3:
+
+    printf("podaj boki prostokata:");
+    printf("a=");
+    scanf("%i",&a);
+    printf("b=");
+    scanf("%i",&b);
+    P=a*b;
+    printf("pole tego prostokata wynosi:");
+    printf("%f", P);
+
+    break;
+    }
+    return 0;
+}
