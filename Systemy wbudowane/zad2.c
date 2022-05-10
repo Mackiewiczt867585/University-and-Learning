@@ -5,7 +5,7 @@ _CONFIG2(FCKSM_CSDCMD & OSCIOFNC_ON & POSCMOD_HS & FNOSC_PRI)
 
 #define SCALE 308L
 
-/* numer którym dostajemy siê do czujnika temperatury */
+/* numer ktÃ³rym dostajemy siÃª do czujnika temperatury */
 
 #define TSENS 4
 #define TVOLT 5
