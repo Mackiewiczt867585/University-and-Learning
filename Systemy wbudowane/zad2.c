@@ -5,10 +5,9 @@ _CONFIG2(FCKSM_CSDCMD & OSCIOFNC_ON & POSCMOD_HS & FNOSC_PRI)
 
 #define SCALE 308L
 
-/* numer którym dostajemy siê do czujnika temperatury */
+/* numer którym dostajemy się do czujnika temperatury */
 
 #define TSENS 4
-#define TVOLT 5
 #define AINPUTS 0xffcf
 void ADCinit(int amask)
 
@@ -41,7 +40,6 @@ int main(void)
 	int temp;
 	unsigned int szybkosc = 500L;
 	int counter=0;
-	int pot=0;
 	int limit = 240;
 
 	PORTA = 0x0000;
@@ -56,14 +54,14 @@ int main(void)
 			display = 1;
 			while(1){
 
-				pot = readADC(TVOLT);
+				temp = readADC(TSENS);
 
 				if (PORTDbits.RD6 == 0) {
 					counter = 0;
 					break;
 				}
 
-				if (pot < limit) {
+				if (temp < limit) {
 					counter = 0;
 					break;
 				}	
