@@ -194,9 +194,7 @@ void main(void) {
     lcd_init(); //Inicjalizacja wy?wietlacza
     lcd_cmd(L_CLR); //Czyszczenie wy?wietlacza
     
-    CreateCustomCharacter(steaming_bun_1, 0);
-    CreateCustomCharacter(eating_face, 1);
-    CreateCustomCharacter(thumb_up, 2);
+    
     CreateCustomCharacter(letter_h, 3);
     CreateCustomCharacter(letter_o, 4);
     CreateCustomCharacter(letter_t, 5);
@@ -205,6 +203,10 @@ void main(void) {
     while(1)
     {
 
+    CreateCustomCharacter(steaming_bun_1, 0);
+    CreateCustomCharacter(eating_face, 1);
+    CreateCustomCharacter(thumb_up, 2);
+        
        lcd_cmd(L_CLR);
        
        lcd_cmd(L_L1);
