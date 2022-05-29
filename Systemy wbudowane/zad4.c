@@ -179,12 +179,11 @@ void write_power(int power){
 }
 
 void write_time(int time){
-    int mins=0;
-    int secs=0;
-    mins = time/60;
-    secs = time%60;
+    int mins=time/60;
+    int secs=time%60;
     lcd_cmd(L_L2+6);
-    lcd_str("0:00");
+    char text[5] = {mins/10+'0', mins%10+'0', ':', secs/10+'0', secs%10+'0'};
+    lcd_str(text);
 }
 
 void initial_screen(){
@@ -215,7 +214,7 @@ void main(void) {
     lcd_cmd(L_CLR); //Czyszczenie wy?wietlacza
     
     int power=0;
-    int time=61;
+    int time=0;
     
     initial_screen();
     
@@ -233,11 +232,18 @@ void main(void) {
         }
         
         if(PORTBbits.RB3 == 0){
-            time = time + 1;
+            time = time + 10;
         }
         
         if(PORTBbits.RB2 == 0){
-            /* start countdown*/
+            while (time > 0){
+                delay(1000);
+                if (PORTBbits.RB2 == 0){
+                break;
+                }
+                time = time - 1;
+                write_time(time);
+            }
         }
         
         if(PORTBbits.RB1 == 0){
