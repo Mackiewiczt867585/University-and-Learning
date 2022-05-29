@@ -69,6 +69,60 @@
 
 #define L_CFG   0x38
 
+int turn=0; 
+
+void spec_delay(unsigned int ms)
+{
+    unsigned int i;
+    unsigned char j;
+    
+ for (i =0; i< ms; i++){
+  for (j =0 ; j < 200; j++){
+    if (PORTBbits.RB3 == 0){
+        turn = 1;
+    }
+    if (PORTBbits.RB5 == 0){
+        turn = 0;
+    }
+    Nop();
+    if (PORTBbits.RB3 == 0){
+        turn = 1;
+    }
+    if (PORTBbits.RB5 == 0){
+        turn = 0;
+    }
+    Nop();
+    if (PORTBbits.RB3 == 0){
+        turn = 1;
+    }
+    if (PORTBbits.RB5 == 0){
+        turn = 0;
+    }
+    Nop();
+    if (PORTBbits.RB3 == 0){
+        turn = 1;
+    }
+    if (PORTBbits.RB5 == 0){
+        turn = 0;
+    }
+    Nop();
+    if (PORTBbits.RB3 == 0){
+        turn = 1;
+    }
+    if (PORTBbits.RB5 == 0){
+        turn = 0;
+    }
+    Nop();
+    if (PORTBbits.RB3 == 0){
+        turn = 1;
+    }
+    if (PORTBbits.RB5 == 0){
+        turn = 0;
+    }
+   }
+ }
+}
+
 void delay(unsigned int ms)
 {
     unsigned int i;
@@ -160,6 +214,39 @@ void lcd_str(const char* str)
  }  
 }
 
+int set_time(int value){ 
+    if (value < 340){
+        return 60; 
+    }else if (value >= 340 && value < 680){
+        return 180; 
+    } else{
+        return 300; 
+    }
+}
+
+void write_time_1(int time){ 
+    int mins=time/60; 
+    int secs=time%60; 
+    lcd_cmd(L_L2); 
+    char text[5] = {mins/10+'0', mins%10+'0', ':', secs/10+'0', secs%10+'0'};
+    lcd_str(text); 
+}
+
+void write_time_2(int time){ 
+    int mins=time/60; 
+    int secs=time%60; 
+    lcd_cmd(L_L2+11); 
+    char text[5] = {mins/10+'0', mins%10+'0', ':', secs/10+'0', secs%10+'0'};
+    lcd_str(text); 
+}
+
+void initial_screen(){
+    lcd_cmd(L_L1);
+    lcd_str("GRACZ 1 GRACZ 2");
+    write_time_1(0);
+    write_time_2(0);
+}
+
 void main(void) {
     
     //Inicjalizacja konwertera analogowo cyfrowego
@@ -176,10 +263,50 @@ void main(void) {
     lcd_init(); //Inicjalizacja wy?wietlacza
     lcd_cmd(L_CLR); //Czyszczenie wy?wietlacza
     
+    unsigned int pot; 
+    int time1=0;
+    int time2=0; 
+    int running=0; 
+    
+    initial_screen();
+    
     while(1)
     {
-        
+        pot=adc(1);
+        time1=set_time(pot);
+        time2=set_time(pot);
+        write_time_1(time1);
+        write_time_2(time2);
+        if (PORTBbits.RB3 == 0){
+            running=1;
+            turn=1;
+            while(running == 1){
+                if (turn == 1){
+                    time2 = time2 - 1;
+                    write_time_2(time2);
+                }
+                if (turn == 0){
+                    time1 = time1 - 1;
+                    write_time_1(time1);
+                }
+                if (time1 == 0){
+                    lcd_cmd(L_L2);
+                    lcd_str("Gracz 2 wygrywa!");
+                    delay(5000);
+                    break;
+                }
+                if (time2 == 0){
+                    lcd_cmd(L_L2);
+                    lcd_str("Gracz 1 wygrywa!");
+                    delay(5000);
+                    break;
+                }
+                spec_delay(125);
+            }
+        }
+        delay(120);
+        lcd_cmd(L_CLR);
+        initial_screen();
     }
-    
     return;
 }
