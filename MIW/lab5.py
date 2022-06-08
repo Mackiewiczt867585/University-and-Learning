@@ -31,8 +31,6 @@ def var2(list):
 
 def standard_deviation(list):
     return math.sqrt(variation(list))
-
-def function(list):
     
 
 test = [row[0] for row in data]

@@ -1,22 +1,6 @@
-import math
-from more_itertools import grouper
 import numpy as np
-import random
 import MIW_labs as lab3
 
-#original_values = lab3.readfile("australian.dat")          # matrix
-#tuple_list = lab3.measure(sample, original_values)         # list of tuples (class, distance)
-#grouped = lab3.group(tuple_list)                           # dict with {class: list of distances}
-#summary = lab3.sum_distance(grouped, 5)                    # dict with {class: sum of k the smallest distances}
-#output = lab3.decide(summary)                              # class with the smallest sum of k distances
-
-
-
-# - kolorki 1
-# petla:
-# - srodek masy
-# - nowe kolorki względem srodka masy
-# - konczymy petle, gdy kolorki sie nie zmieniaja
 original_values = lab3.readfile("australian.dat")
 random_class = lab3.assign_random_class(original_values)
 

@@ -29,14 +29,14 @@ def split_into_q_r(matrix, q, r):
         r.append(vector)
     r = np.array(r)
 
-sample = np.array([[1,0,1], [1,1,0], [0,1,1]])
-q=[]
-r=[]
+# sample = np.array([[1,0,1], [1,1,0], [0,1,1]])
+# q=[]
+# r=[]
 
-split_into_q_r(sample, q, r)
+# split_into_q_r(sample, q, r)
 
-print(q)
-print(r)
+# print(q)
+# print(r)
 
-test = np.round(np.dot(np.array(q).T, np.array(r)), decimals=2)
-print(test)
+# test = np.round(np.dot(np.array(q).T, np.array(r)), decimals=2)
+# print(test)
