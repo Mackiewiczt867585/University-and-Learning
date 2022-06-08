@@ -14,18 +14,57 @@ unsigned char bin2bcd (unsigned char BinaryNumber){
 	return ((BinaryNumber / 10) << 4) | (BinaryNumber % 10);
 }
 
+void dec_to_bin(int *bin, int dec, int size){
+    int i;
+	for(i=size-1;i>=0;i--){
+        bin[i]=(dec&1);
+        dec=dec>>1;
+    }
+}
+ 
+int k_bit_of_number(int number, int k_bit){
+    return (number>>k_bit-1)&1;
+}
+
+
+int prng(int seed,int power){
+    if(seed>0){
+        int first_seed=seed;
+        int second_seed=seed;
+		int i;
+        for(i=0;i<power;i++){
+            int oldest_bit = ((k_bit_of_number(first_seed,1)^k_bit_of_number(first_seed,2))^k_bit_of_number(first_seed,5))^k_bit_of_number(first_seed,6);
+            second_seed=first_seed>>1;
+            if(oldest_bit==1){
+                second_seed=second_seed|32;
+            }
+            first_seed=second_seed;
+        }
+        return second_seed;
+    }
+    return 0;
+}
+
+
+int prng_linear(int seed){
+    int new_seed=seed;
+    new_seed = prng(new_seed,1);
+    return new_seed;
+}
+
 
 int main(void){
 unsigned long i;
 unsigned char display=0;
 unsigned char bcd=0;
-int grade=0;
+int grade=8;
 int gray=0;
 int direction=1;
 int shifts;
 int base;
 int move; 
 int count;
+int seed=1;
 //inicjalizacja
  PORTA=0x0000;
  TRISA=0xFF00;
@@ -221,7 +260,8 @@ again:
 			grade=grade-1;
 			break;
 		}
-		display=base;
+		display=prng_linear(seed);
+		seed=prng_linear(seed);
 		}
 }
 	goto again;	
